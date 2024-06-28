@@ -1,0 +1,16 @@
+# App
+.env
+.coverage
+
+# Structurizr
+.structurizr/
+workspace.json
+
+# IDE
+.venv
+.vscode
+
+# System
+__pycache__/
+*.pyc
+.DS_Store
