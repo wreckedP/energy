@@ -9,7 +9,6 @@ from app.database.crud.installation import installation_crud, InstallationModel
 from app.energy.provider import get_platform, BaseProvider
 
 
-# Guard dependencies
 
 def installation(
     session: Annotated[Session, Depends(pg_session)],
