@@ -6,7 +6,7 @@ from app.api.dependencies.user import current_active_superuser, current_active_u
 from app.database.session import pg_session, Session
 from app.database.models.user import UserModel
 from app.database.crud.installation import installation_crud, InstallationModel
-from app.energy.provider import EnergyProvider
+from app.energy.provider import get_platform, BaseProvider
 
 
 # Guard dependencies
@@ -33,10 +33,10 @@ def installation(
 
 def provider_of_installation(
     installation: Annotated[InstallationModel, Depends(installation)],
-) -> EnergyProvider | None:
+) -> BaseProvider | None:
 
-    if installation.id and installation.provider_name and installation.provider_key :
-        return EnergyProvider(installation.id, installation.provider_name, installation.provider_key)
+    if installation.provider_name and installation.provider_key :
+        return get_platform(installation.provider_name, installation.provider_key)
 
 
 # SU dependencies
