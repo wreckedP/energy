@@ -1,52 +1,23 @@
-# Deployment
+# Energy Collection System
+This application gathers measurements from various platforms. It retrieves data through API calls and present the measurements in a standardized format.
 
-start all docker containers with
+## Models
+- User
+- Installation
+- Meter
+- Channel
+- Measurement
 
-    docker-compose up -d database pgadmin
-
-    docker-compose up energy
-
-# [Energy dashboard](http://localhost:5555)
-flower UI for celery workers and tasks
-
-# [Postgres admin interface](http://localhost:8080)
-
-login:
-
-- Email: admin@kieback-peter.nl
-- Password: admin
-
-click on 'add new server', go to connection tab:
-
-- Hostname: database
-- Username: super_kp
-- Password: super_kp
-
-# Dependencies
-
-### Prerequisites
-
-- [Poetry](https://python-poetry.org/docs/#installation)
-- [Docker-compose](https://docs.docker.com/compose/)
-
-### Stack
+## Stack
 
 - [Fast api](https://fastapi.tiangolo.com/) + Uvicorn
 - [SQLAlchemy](https://sqlalchemy.org) + [Alembic](https://alembic.sqlalchemy.org/en/latest/tutorial.html#the-migration-environment) + Postgres
 
-## Poetry
+---
 
-make sure you have poetry as package manager
-
-install requirements
-
-    poetry install
-
-activate shell with dependencies:
-
-    poetry shell
-
-    deactivate
+- [Energy dashboard](http://localhost:5555)
+Flower UI for celery workers and tasks
+- [Postgres admin ](http://localhost:8080) web interface
 
 ## Alembic
 
