@@ -18,6 +18,8 @@ class CRUDInstallation(
         installation_data = jsonable_encoder(create_obj)
         installation_data["owner_email"] = owner_email
 
+        # TODO: encrypt api_key
+
         new_installation = session.scalar(
             insert(self.model).values(installation_data).returning(self.model)
         )
