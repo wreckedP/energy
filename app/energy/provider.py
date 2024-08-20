@@ -1,8 +1,10 @@
 from app.energy.providers import mock, energiemissie, joulz, kenter
 from app.energy.providers.base_provider import BaseProvider
+from app.settings.security import decrypt
 
-def get_platform(provider_name: str, api_key: str) -> BaseProvider:
-    # TODO: decrypt api_key
+def get_platform(provider_name: str, key_token: str) -> BaseProvider:
+
+    api_key = decrypt(key_token)["key"]
     match provider_name:
         case "mock":
             return mock.MockAdapter(api_key)

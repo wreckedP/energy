@@ -1,3 +1,4 @@
+from app.settings.security import encrypt
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy import select, insert
 from app.database.crud.base_crud import Session, CRUDBase
@@ -15,13 +16,11 @@ class CRUDInstallation(
         owner_email: str,
     ) -> InstallationModel:
 
-        installation_data = jsonable_encoder(create_obj)
-        installation_data["owner_email"] = owner_email
-
-        # TODO: encrypt api_key
+        create_obj.owner_email = owner_email
+        create_obj.provider_key = encrypt({"key": create_obj.provider_key})
 
         new_installation = session.scalar(
-            insert(self.model).values(installation_data).returning(self.model)
+            insert(self.model).values(jsonable_encoder(create_obj)).returning(self.model)
         )
 
         user = user_crud.get_by_email(session, owner_email)
