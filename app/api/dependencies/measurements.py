@@ -4,7 +4,7 @@ from fastapi import BackgroundTasks, Depends
 
 from app.api.dependencies.installation import (
     installation,
-    provider_of_installation,
+    provider,
 )
 from app.database.crud.measurement import measurement_crud
 from app.database.session import pg_session
@@ -39,7 +39,7 @@ async def update_day_measurement_from_provider(
     year: int,
     do: BackgroundTasks,
     session=Depends(pg_session),
-    provider=Depends(provider_of_installation),
+    provider=Depends(provider),
 ):
     meter = meter_crud.get(session, id=meter_id)
 
@@ -59,7 +59,7 @@ async def update_month_measurement_from_provider(
     year: int,
     do: BackgroundTasks,
     session=Depends(pg_session),
-    provider=Depends(provider_of_installation),
+    provider=Depends(provider),
 ):
     do.add_task(
         provider.fetch_month_measurements,

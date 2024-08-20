@@ -2,7 +2,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends
 from fastapi.exceptions import HTTPException
 
-from app.api.dependencies.installation import get_all_installations, installation
+from app.api.dependencies.installation import all_installations, installation
 from app.api.dependencies.user import current_active_user, UserModel
 from app.database.session import pg_session, Session, Session
 from app.database.crud.installation import installation_crud, InstallationModel
@@ -56,6 +56,6 @@ def put_installation_installation(
 
 @router.get("/all")
 def all_installations(
-    installation_list=Depends(get_all_installations),
+    installation_list=Depends(all_installations),
 ):
     return installation_list

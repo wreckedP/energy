@@ -4,7 +4,7 @@ from pydantic import BaseModel
 from app.database.models.installation import InstallationModel
 from app.energy import worker
 
-from app.api.dependencies.installation import get_all_installations, installation
+from app.api.dependencies.installation import all_installations, installation
 from app.api.dependencies.measurements import (
     delete_measurements_range,
     update_day_measurement_from_provider,

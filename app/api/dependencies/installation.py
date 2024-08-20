@@ -31,7 +31,7 @@ def installation(
         return installation
 
 
-def provider_of_installation(
+def provider(
     installation: Annotated[InstallationModel, Depends(installation)],
 ) -> BaseProvider | None:
 
@@ -42,7 +42,7 @@ def provider_of_installation(
 # SU dependencies
 
 
-def get_all_installations(
+def all_installations(
     session: Annotated[Session, Depends(pg_session)],
     current_user: Annotated[UserModel, Depends(current_active_superuser)],
     skip: int | None = None,
