@@ -2,25 +2,13 @@ from calendar import monthrange
 from datetime import datetime, timedelta
 from typing import Annotated
 from fastapi import APIRouter, Depends
-from app.api.dependencies.installation import installation
 
+from app.api.dependencies.installation import installation, InstallationModel
 from app.database.crud.measurement import measurement_crud
-
-from app.database.models.installation import InstallationModel
 from app.database.session import pg_session, Session
 
+
 router = APIRouter()
-
-# TODO: postgres trigger recalculations
-# @router.post("/{channel_id}")
-# def new_measurements(new_meter=Depends(create_measurement)):
-#     return new_meter
-
-
-# @router.put("/{measurement_id}")
-# def put_measurement(new_meter=Depends(update_measurement)):
-#     return new_meter
-
 
 @router.get("/{channel_id}/day/{year}/{month}/{day}")
 def day_measurements(

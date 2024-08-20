@@ -28,7 +28,6 @@ def new_meter(
 def all_installation_meters(
     installation: Annotated[InstallationModel, Depends(installation)],
 ):
-    # TODO return meter with channels
     return installation.meters
 
 

@@ -2,7 +2,7 @@ from asyncio import get_event_loop
 from celery import Celery
 
 from app.core.settings import env
-from app.energy.service import update_measurements, update_meters
+from app.energy.tasks import update_measurements, update_meters
 
 
 celery = Celery(__name__, broker=env.broker_url, backend=env.broker_url)
