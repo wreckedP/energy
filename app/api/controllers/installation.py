@@ -37,7 +37,8 @@ async def create_installation(
 
 @router.get("")
 def get_installation(installation: Annotated[InstallationModel, Depends(installation)]):
-    
+    if not installation:
+        raise HTTPException(404, "You have no installation")
     return installation.to_dict()
 
 

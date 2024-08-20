@@ -13,10 +13,13 @@ def get_current_user(
     session: Annotated[Session, Depends(pg_session)],
     token: Annotated[str, Depends(oauth2)],
 ) -> UserModel | None:
+    """
+    Use JWT token to get user id
+    """
 
     token_data = decode_token(token)
     if token_data:
-        return user_crud.get(session, id=token_data.sub)
+        return user_crud.get(session, token_data.sub)
 
 
 def current_active_user(

@@ -39,9 +39,6 @@ def provider(
         return get_platform(installation.provider_name, installation.provider_key)
 
 
-# SU dependencies
-
-
 def all_installations(
     session: Annotated[Session, Depends(pg_session)],
     current_user: Annotated[UserModel, Depends(current_active_superuser)],

@@ -19,7 +19,7 @@ def get_access_token(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
 ):
     """
-    OAuth2 compatible token login, set an access token for future requests
+    OAuth2 compatible token login, set an access token on header for future requests
     """
     
     user = user_crud.authenticate(
@@ -35,5 +35,4 @@ def get_access_token(
             ),
             "token_type": "bearer",
         }
-
         return access_token
