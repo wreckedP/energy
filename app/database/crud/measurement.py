@@ -16,7 +16,7 @@ class CRUDMeasurement(
 ):
     def create(
         self, session: Session, create_obj: MeasurementCreateDTO, channel_id: int
-    ):
+    ) -> MeasurementModel:
         measurement_data = jsonable_encoder(create_obj)
         measurement_data["channel_id"] = channel_id
         session.scalar(
@@ -30,7 +30,7 @@ class CRUDMeasurement(
         channel_id: int,
         from_date: float,
         till_date: float,
-    ):
+    )  -> list[MeasurementModel]:
         """Returns a list of measurements for a channel with given from and till dates"""
         return (
             session.query(self.model)
@@ -44,7 +44,7 @@ class CRUDMeasurement(
     def latest_channel_measurement(
         self, session: Session,
         channel_id: int
-    ):
+    ) -> MeasurementModel | None:
 
         measurement = session.scalars(
             select(self.model)

@@ -10,7 +10,7 @@ from app.database.crud.base_crud import log, Session, CRUDBase  # ,log
 class CRUDChannel(CRUDBase[ChannelModel, ChannelCreateDTO, ChannelUpdateDTO]):
     def create(
         self, session: Session, create_obj: ChannelCreateDTO, meter_id: int
-    ):
+    ) -> ChannelModel :
         channel_data = jsonable_encoder(create_obj)
         channel_data["meter_id"] = meter_id
         new_channel = session.scalars(
@@ -21,7 +21,7 @@ class CRUDChannel(CRUDBase[ChannelModel, ChannelCreateDTO, ChannelUpdateDTO]):
         
     def get_by_channel_name_and_meter(
         self, session: Session, channel_name: str, meter_id: int
-    ):
+    ) -> ChannelModel | None:
         channel = session.scalars(
             select(self.model)
             .filter_by(meter_id = meter_id, name = channel_name)

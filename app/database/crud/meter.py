@@ -10,7 +10,7 @@ from app.database.crud.base_crud import Session, CRUDBase  # ,log
 class CRUDMeter(CRUDBase[MeterModel, MeterCreateDTO, MeterUpdateDTO]):
     def create(
         self, session: Session, create_obj: MeterCreateDTO, installation_id: int
-    ):
+    ) -> MeterModel:
         meter_data = jsonable_encoder(create_obj)
         meter_data["installation_id"] = installation_id
         new_meter = session.scalars(
@@ -19,14 +19,14 @@ class CRUDMeter(CRUDBase[MeterModel, MeterCreateDTO, MeterUpdateDTO]):
         session.commit()
         return new_meter
 
-    def get_by_id_with_channels(self, session: Session, meter_id: int):
+    def get_by_id_with_channels(self, session: Session, meter_id: int) -> MeterModel | None:
         return session.scalar(
             select(MeterModel)
             .where(MeterModel.id == meter_id)
             .options(selectinload(MeterModel.channels))
-        )
+        ).one_or_none()
 
-    def get_by_source_id(self, session: Session, source_id: str):
+    def get_by_source_id(self, session: Session, source_id: str) -> MeterModel | None:
         return session.scalars(
             select(self.model).filter_by(source_id=source_id)
         ).one_or_none()
