@@ -3,7 +3,7 @@ from fastapi.encoders import jsonable_encoder
 
 from sqlalchemy import select, insert
 
-from app.core.security import create_hash, verify_hash
+from app.settings.security import create_hash, verify_hash
 from app.database.models.user import UserModel
 from app.schemas.user import UserCreateDTO, UserPublic
 from app.database.crud.base_crud import Session, CRUDBase  # ,log

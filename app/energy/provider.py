@@ -4,7 +4,7 @@ from app.energy.providers.base_provider import BaseProvider
 def get_platform(provider_name: str, api_key: str) -> BaseProvider:
     # TODO: decrypt api_key
     match provider_name:
-        case "mock":  # test / demo adapter
+        case "mock":
             return mock.MockAdapter(api_key)
         case "energiemissie":
             return energiemissie.EnergiemissieAdapter(api_key)

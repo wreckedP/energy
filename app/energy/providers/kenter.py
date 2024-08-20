@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from app.core.logger import log
+from app.settings.logger import log
 from app.energy.providers.base_provider import BaseProvider
 from app.schemas.channel import ChannelWithMeasurements
 from app.schemas.measurements import MeasurementCreateDTO

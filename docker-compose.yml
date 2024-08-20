@@ -1,4 +1,3 @@
-version: "3.8"
 
 services:
   api:
@@ -6,7 +5,7 @@ services:
     restart: always
     ports:
       - 443:8000
-    command: bash -c "alembic upgrade head && uvicorn app.main:api --proxy-headers --host 0.0.0.0 --ssl-keyfile app/core/certificates/star_kieback-peter.net-decrypted.key --ssl-certfile app/core/certificates/star_kieback-peter.net.crt --reload"
+    command: bash -c "alembic upgrade head && uvicorn app.main:api --proxy-headers --host 0.0.0.0 --ssl-keyfile app/settings/certificates/star_kieback-peter.net-decrypted.key --ssl-certfile app/settings/certificates/star_kieback-peter.net.crt --reload"
     environment:
       - API_LOG_LEVEL=${API_LOG_LEVEL}
       - SIGN_KEY=${SIGN_KEY}
@@ -76,5 +75,4 @@ services:
 
 volumes:
   energy-database:
-    # external: true
   pgadmin-data:

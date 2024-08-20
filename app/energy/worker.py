@@ -1,11 +1,11 @@
 from asyncio import get_event_loop
 from celery import Celery
 
-from app.core.settings import env
+from app.settings.configuration import configuration
 from app.energy.tasks import update_measurements, update_meters
 
 
-celery = Celery(__name__, broker=env.broker_url, backend=env.broker_url)
+celery = Celery(__name__, broker=configuration.broker_url, backend=configuration.broker_url)
 loop = get_event_loop()
 
 @celery.task(name="sync_meters", ignore_result=False)

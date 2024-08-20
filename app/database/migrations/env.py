@@ -7,7 +7,7 @@ from alembic.context import (
     run_migrations,
     is_offline_mode,
 )
-from app.core.settings import env
+from app.settings.configuration import configuration
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -23,7 +23,7 @@ if config.config_file_name:
 from app.database.models.base import BaseModel  # pylint: disable=wrong-import-position
 
 target_metadata = BaseModel.metadata
-database_url = env.db_driver + env.db_url + env.db_name
+database_url = configuration.db_driver + configuration.db_url + configuration.db_name
 
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode.

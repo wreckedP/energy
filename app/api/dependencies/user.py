@@ -3,7 +3,7 @@ from fastapi import Depends
 from fastapi.exceptions import HTTPException
 from fastapi.security import OAuth2PasswordBearer
 
-from app.core.security import decode_token
+from app.settings.security import decode_token
 from app.database.crud.user import user_crud, UserModel
 from app.database.session import pg_session, Session
 

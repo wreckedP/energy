@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from typing import Any
 
-from app.core.logger import log
+from app.settings.logger import log
 from app.database.models.meter import MeterModel
 from app.energy.providers.base_provider import BaseProvider
 from app.schemas.channel import ChannelWithMeasurements

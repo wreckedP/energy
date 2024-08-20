@@ -5,7 +5,7 @@ from pydantic import BaseModel as DTO
 from sqlalchemy import select
 
 from sqlalchemy.orm import Session
-from app.core.logger import log  # create cutstom crud logger
+from app.settings.logger import log  # create cutstom crud logger
 
 from app.database.models.base_model import BaseModel
 

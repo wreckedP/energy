@@ -11,15 +11,15 @@ from sqlalchemy.ext.asyncio import (
 from sqlalchemy.orm import Session, declarative_base, sessionmaker, scoped_session
 
 
-from app.core.settings import env
+from app.settings.configuration import configuration
 
 Base = declarative_base()
 
-session_factory = sessionmaker(autoflush=False, bind=create_engine(env.db_driver + env.db_url + env.db_name))
+session_factory = sessionmaker(autoflush=False, bind=create_engine(configuration.db_driver + configuration.db_url + configuration.db_name))
 session = session_factory()
 
 async_engine = create_async_engine(
-    env.db_async_driver + env.db_url + env.db_name,
+    configuration.db_async_driver + configuration.db_url + configuration.db_name,
     echo=True,
 )
 async_session_factory = async_sessionmaker(async_engine, expire_on_commit=False)

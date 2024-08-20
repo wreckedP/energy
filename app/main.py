@@ -1,4 +1,4 @@
-from app.core.logger import log
+from app.settings.logger import log
 
 log.info("Loading fastapi")
 

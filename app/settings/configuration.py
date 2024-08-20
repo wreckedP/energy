@@ -7,7 +7,7 @@ load_dotenv()
 
 
 @dataclass
-class env:
+class configuration:
     app_log_level: str = getenv("API_LOG_LEVEL") or "INFO"
     broker_url: str = getenv("BROKER_URL") or "redis://broker:6379"
 

@@ -3,7 +3,7 @@ from typing import Any
 
 from requests import post
 
-from app.core.logger import log
+from app.settings.logger import log
 from app.database.models.meter import MeterModel
 from app.energy.providers.base_provider import BaseProvider
 from app.schemas.channel import ChannelWithMeasurements
@@ -36,11 +36,6 @@ class FuduraAdapter(BaseProvider):
         """Returns all available meters from endpoint in meter objects"""
         return
 
-    def format_measurements(
-        self, raw_measurements: list[dict[str, Any]]
-    ) -> list[ChannelWithMeasurements]:
-        return
-
     async def fetch_day_measurements(self, meter: str, date: datetime):
         """Get measurement values from a meter on a speficic day"""
         return self.format_measurements()
@@ -48,3 +43,8 @@ class FuduraAdapter(BaseProvider):
     async def fetch_month_measurements(self, meter: str, date: datetime):
         """Get measurement values from a meter on a speficic day"""
         return self.format_measurements()
+
+    def format_measurements(
+        self, raw_measurements: list[dict[str, Any]]
+    ) -> list[ChannelWithMeasurements]:
+        return

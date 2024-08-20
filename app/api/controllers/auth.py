@@ -4,8 +4,8 @@ from fastapi import APIRouter, Depends
 from fastapi.exceptions import HTTPException
 from fastapi.security import  OAuth2PasswordRequestForm
 
-from app.core.settings import env
-from app.core.security import  encode_token
+from app.settings.configuration import configuration
+from app.settings.security import  encode_token
 from app.database.crud.user import user_crud
 from app.database.session import pg_session, Session
 
@@ -28,7 +28,7 @@ def get_access_token(
     if user and not user.is_active:
         raise HTTPException(400, "Inactive account")
     if user:
-        access_token_expires = timedelta(minutes=float(env.token_expire_minutes))
+        access_token_expires = timedelta(minutes=float(configuration.token_expire_minutes))
         access_token = {
             "access_token": encode_token(
                 user.id, expires_delta=access_token_expires
