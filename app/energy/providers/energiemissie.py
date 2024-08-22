@@ -41,35 +41,6 @@ class EnergiemissieAdapter(BaseProvider):
 
         return meter_objects
 
-    def format_measurements(self, raw_channels) -> list[ChannelWithMeasurements]:
-        if not raw_channels:
-            log.critical("No measurements found on source")
-            return []
-
-        channel_names: list[str] = [d["channel"] for d in raw_channels]
-
-        measurements_per_channel: list[ChannelWithMeasurements] = []
-        count = 0
-        for i, channel in enumerate(channel_names):
-            measurements: list[MeasurementCreateDTO] = []
-            for measurement in raw_channels[i]["values"]:
-                measurements.append(
-                    MeasurementCreateDTO(
-                        value=measurement["value"], timestamp=measurement["timestamp"]
-                    )
-                )
-                count += 1
-
-            measurements_per_channel.append(
-                ChannelWithMeasurements(
-                    channel_name=channel, measurements=measurements
-                )
-            )
-
-        log.info("fetched %s measurements", count)
-
-        return measurements_per_channel
-
     async def fetch_day_measurements(self, source_id: str, date: datetime):
         """Get measurement values from a meter on a speficic day"""
 
@@ -105,3 +76,32 @@ class EnergiemissieAdapter(BaseProvider):
                     self.flag = True
                               
         return self.format_measurements(raw_measurements)
+
+    def format_measurements(self, raw_channels) -> list[ChannelWithMeasurements]:
+        if not raw_channels:
+            log.critical("No measurements found on source")
+            return []
+
+        channel_names: list[str] = [d["channel"] for d in raw_channels]
+
+        measurements_per_channel: list[ChannelWithMeasurements] = []
+        count = 0
+        for i, channel in enumerate(channel_names):
+            measurements: list[MeasurementCreateDTO] = []
+            for measurement in raw_channels[i]["values"]:
+                measurements.append(
+                    MeasurementCreateDTO(
+                        value=measurement["value"], timestamp=measurement["timestamp"]
+                    )
+                )
+                count += 1
+
+            measurements_per_channel.append(
+                ChannelWithMeasurements(
+                    channel_name=channel, measurements=measurements
+                )
+            )
+
+        log.info("fetched %s measurements", count)
+
+        return measurements_per_channel

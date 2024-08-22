@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
+from typing import Any
 
 from fastapi.exceptions import HTTPException
 import msgspec
@@ -25,8 +26,7 @@ class BaseProvider(ABC):
 
         match response.status_code:
             case 200:
-                response = msgspec.json.decode(response.content)
-                return response
+                return msgspec.json.decode(response.content)
 
             case 401:
                 print("adapter response:\n{response}")
