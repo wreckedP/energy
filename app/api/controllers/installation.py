@@ -56,7 +56,7 @@ def put_installation_installation(
 
 
 @router.get("/all")
-def all_installations(
+def get_all_installations(
     installation_list=Depends(all_installations),
 ):
     return installation_list
